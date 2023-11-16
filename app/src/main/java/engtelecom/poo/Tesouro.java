@@ -1,18 +1,28 @@
 package engtelecom.poo;
 
-public class Tesouro {
+import java.awt.Color;
 
+import edu.princeton.cs.algs4.Draw;
+
+public class Tesouro extends Elemento{
+
+    // Nao usado no momento
     public static final int LARGURA = 10;
     public static final int ALTURA = 10;
+    public static final int RAIO = 20;
 
     private int valor;
-    private int posicaoX;
-    private int posicaoY;
-    
-    public Tesouro(int valor, int posicaoX, int posicaoY) {
+
+    public Tesouro(int posicaoX, int posicaoY, int valor) {
+        super(posicaoX, posicaoY);
         this.valor = valor;
-        this.posicaoX = posicaoX;
-        this.posicaoY = posicaoY;
+    }
+
+    @Override
+    public void desenhar(Draw d){
+        // d.setPenColor(Color.BLUE);
+        // d.filledCircle(posicaoX, posicaoY, RAIO);
+        d.picture(posicaoX, posicaoY, "treasureDim.png");
     }
 
     public int getPosicaoX() {

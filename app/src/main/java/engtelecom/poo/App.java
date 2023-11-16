@@ -5,6 +5,9 @@ package engtelecom.poo;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+
+import com.google.common.collect.ArrayListMultimap;
 
 import edu.princeton.cs.algs4.Draw;
 
@@ -37,41 +40,67 @@ public class App {
 
         App  app = new App();
 
-        int x = 300;
-        int y = 300;
-        int raio = 10;
-        int vx = 1;
-        int vy = 2;
+        Mapa mapa = new Mapa(600, 600, 3);
+
+        ArrayList<Elemento> elementos = new ArrayList<>();
+
+        elementos.add(new Robo(300, 300, mapa, 2, 1, 0, 10, null));
 
         while(true){
-            app.desenharQuadrado(400, 400, 20);
-            app.desenharCirculo(x ,y, raio);   
+            // Atualiza coordenadas dos elementos
+            for (var e : elementos) {
+                if(e instanceof Robo){
+                    Robo r = (Robo) e;
 
-            x+=vx;
-            y+=vy;
-
-            if((x+raio > 600) || (x+raio < 0)){
-                vx *= -1;
-            }
-            if((y+raio > 600) || (y+raio < 0)){
-                vy *= -1;
+                    r.movimentar(1);
+                }
             }
 
-            
-            
-            app.desenho.pause(20);
+            // Desenha os elementos com novas coordenadas
+            elementos.forEach(e->e.desenhar(app.desenho));
+            mapa.desenhar(app.desenho);
+
+            app.desenho.pause(100);
             app.desenho.show();
             app.desenho.clear(Color.WHITE);
 
-            Rectangle r = new Rectangle(300-20,300-20,40,40);
-            Rectangle outro = new Rectangle(x-raio,y-raio,2*raio,2*raio);
-
-            if(r.intersects(outro)){
-                System.out.println("Sim, bateram");
-                
-            }
-
         }
+
+        // int x = 300;
+        // int y = 300;
+        // int raio = 10;
+        // int vx = 1;
+        // int vy = 2;
+
+        // while(true){
+        //     app.desenharQuadrado(400, 400, 20);
+        //     app.desenharCirculo(x ,y, raio);   
+
+        //     x+=vx;
+        //     y+=vy;
+
+        //     if((x+raio > 600) || (x-raio < 0)){
+        //         vx *= -1;
+        //     }
+        //     if((y+raio > 600) || (y-raio < 0)){
+        //         vy *= -1;
+        //     }
+
+            
+            
+        //     app.desenho.pause(20);
+        //     app.desenho.show();
+        //     app.desenho.clear(Color.WHITE);
+
+        //     Rectangle r = new Rectangle(300-20,300-20,40,40);
+        //     Rectangle outro = new Rectangle(x-raio,y-raio,2*raio,2*raio);
+
+        //     if(r.intersects(outro)){
+        //         System.out.println("Sim, bateram");
+                
+        //     }
+
+        // }
 
 
         // Robo r = new Robo(new Mapa(0, 10, 5), 5, 5, 1, 2, 5);

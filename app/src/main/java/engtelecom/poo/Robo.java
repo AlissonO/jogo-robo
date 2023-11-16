@@ -1,10 +1,14 @@
 package engtelecom.poo;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import edu.princeton.cs.algs4.Draw;
+
 public class Robo extends Elemento{
     
+    // Nao usado no momento
     public static final int LARGURA = 20;
     public static final int ALTURA = 20;
 
@@ -15,27 +19,20 @@ public class Robo extends Elemento{
 
     int pontuacao;
 
-    private int posicaoX;
-    private int posicaoY;
-
     private int capacidadeMochila;
     private ArrayList<Tesouro> mochila;
 
     // Construtor
-    
-    public Robo(Mapa mapa, int posicaoX, int posicaoY, int velicidadeY, int velicidadeX, int capacidadeMochila) {
-        this.mapa = mapa;
-        this.velicidadeY = velicidadeY;
-        this.velicidadeX = velicidadeX;
-        // TODO garantir que a posicao x e y estao dentro dos limites do mapa
-        // se nao estiver posicinao o robo no centro do mapa
-        this.posicaoX = posicaoX;
-        this.posicaoY = posicaoY;
-        
+    public Robo(int posicaoX, int posicaoY, Mapa mapa, int velicidadeY, int velicidadeX, int pontuacao,
+            int capacidadeMochila, ArrayList<Tesouro> mochila) {
+        super(posicaoX, posicaoY);
+        this.mapa = mapa;  
         this.poscionarRoboNoMapa(this.mapa);
 
-        this.capacidadeMochila = capacidadeMochila;
+        this.velicidadeY = velicidadeY;
+        this.velicidadeX = velicidadeX;
         this.pontuacao = 0;
+        this.capacidadeMochila = capacidadeMochila;
         this.mochila = new ArrayList<>();
     }
 
@@ -50,6 +47,14 @@ public class Robo extends Elemento{
     } 
 
     // Métodos
+
+    @Override
+    public void desenhar(Draw d){
+        // d.setPenColor(Color.RED);
+        // d.filledSquare(posicaoX, posicaoY, LARGURA);
+        d.picture(posicaoX, posicaoY, "robotDim.png");
+
+    }
 
     public boolean cavar(){
         if(!mochilaCheia()){
